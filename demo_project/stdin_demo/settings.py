@@ -31,7 +31,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'isdemo.urls'
+ROOT_URLCONF = 'stdin_demo.urls'
 
 TEMPLATES = [
     {
@@ -49,9 +49,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'isdemo.wsgi.application'
+WSGI_APPLICATION = 'stdin_demo.wsgi.application'
 
-ASGI_APPLICATION = 'isdemo.routing.application'
+ASGI_APPLICATION = 'stdin_demo.routing.application'
 
 DATABASES = {
     'default': {

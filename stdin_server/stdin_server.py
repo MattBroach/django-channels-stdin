@@ -25,7 +25,7 @@ class ChannelsCLIServer:
         self.application_future = asyncio.ensure_future(application_instance(
                 receive=self.application_queue.get,
                 send=self.print_response
-            ), loop=loop,
+            ), loop=self.loop,
         )
 
     async def print_response(self, msg):
@@ -41,7 +41,7 @@ class ChannelsCLIServer:
             raise ValueError("Message has no `type` defined")
 
         elif msg['type'] == 'cli.print':
-            print(msg['text'])
+            print('--> {}'.format(msg['text']))
 
         else:
             raise ValueError("Server cannot handle message type {}".format(msg['type']))
@@ -124,7 +124,7 @@ class ChannelsCLIServer:
         tasks.cancel()
 
         with suppress(asyncio.CancelledError):
-            loop.run_until_complete(tasks)
+            self.loop.run_until_complete(tasks)
 
         print('Goodbye!')
 
@@ -153,10 +153,7 @@ def get_application():
 
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    
     application = get_application()
-
     server = ChannelsCLIServer(application)
 
     try:
