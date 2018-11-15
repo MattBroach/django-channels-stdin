@@ -8,7 +8,7 @@ from contextlib import suppress
 from daphne.utils import import_by_path
 
 
-class ChannelsCLIServer:
+class StdInServer:
     # Time, in seconds, that any active futures should be inspected for exceptions
     exception_check_frequency = 1
 
@@ -19,7 +19,7 @@ class ChannelsCLIServer:
         self.loop = asyncio.get_event_loop()
 
         application_instance = application(scope={
-            'type': 'cli',
+            'type': 'stdin',
         })
         self.application_queue = asyncio.Queue()
         self.application_future = asyncio.ensure_future(application_instance(
@@ -154,7 +154,7 @@ def get_application():
 
 if __name__ == '__main__':
     application = get_application()
-    server = ChannelsCLIServer(application)
+    server = StdInServer(application)
 
     try:
         server.start()

@@ -1,8 +1,8 @@
 from channels.routing import ProtocolTypeRouter
 
-from thoughts.consumers import ThoughtCLIConsumer
+from thoughts.consumers import ThoughtStdInConsumer
 
 
 application = ProtocolTypeRouter({
-    'cli': ThoughtCLIConsumer,
+    'stdin': ThoughtStdInConsumer,
 })

@@ -4,7 +4,7 @@ from channels.db import database_sync_to_async
 from .models import Thought
 
 
-class ThoughtCLIConsumer(AsyncConsumer):
+class ThoughtStdInConsumer(AsyncConsumer):
     async def cli_parse(self, msg):
         """
         Extract command from incoming message and parse appropriately
